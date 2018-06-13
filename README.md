@@ -28,7 +28,7 @@ Put your secret.py file in DjangoChat directory.
 #Database
 DB_SETUP = {
     'default': {
-        #Follow the instuctions in Django Docs
+        #Follow the instructions in Django Docs
         'ENGINE': 'django.db.backends.(YOUR_DB_ENGINE_CHECK_DJANGO_DOCS)',
         'NAME': 'YOUR_DATABASE_NAME',
         'USER': 'YOUR_USERNAME',
@@ -46,7 +46,7 @@ HOSTS = [
 #Channel Layer for Django Channels
 CH_LAYERS = {
     'default': {
-        #For exaple Redis
+        #For example Redis
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
             #Redis host
