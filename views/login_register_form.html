@@ -1,0 +1,39 @@
+{% extends 'index.html' %}
+{% block title %}
+<title>{{ title }}</title>
+{% endblock %}
+{% block additional-static %}
+{% load static %}
+<link rel="stylesheet" href="{% static '/css/auth_form.css' %}" type="text/css">
+{% endblock %}
+{% block body %}
+<div class="auth_root">
+    <div class="center auth_container">
+        {% load static %}
+        <img src="{% static '/img/logo.png' %}" style="width: 300; height: auto; margin-top: 100px;">
+        <div class="center auth_form">
+            {% if error %}
+            <div class="auth_context_msg auth_error">
+                {{ error }}
+            </div>
+            {% elif success %}
+            <div class="auth_context_msg auth_success">
+                {{ success }}
+            </div>
+            {% endif %}
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                {{ field }}
+                {% endfor %}
+                {% if title == 'Login' %}
+                <button type="submit" value="Login" class="auth_button" style="float: left;">Login</button>
+                <a href="/register" class="auth_button" style="float: right; width: 88px; text-decoration: none;">Register</button></a>
+                {% else %}
+                <button value="Login" class="auth_button center" style="width: 100%;">Register</button>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

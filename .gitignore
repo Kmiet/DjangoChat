@@ -1,0 +1,9 @@
+/lobby/migrations/*
+/lobby/__pycache__/*
+/DjangoChat/__pycache__/*
+/DjangoChat/secret.py
+/media/*
+/public/*
+/static/img/*
+/static/icons/*
+/static/admin/*

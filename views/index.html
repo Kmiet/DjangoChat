@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content = "width=device-width, initial-scale=1.0">
+        {% block title %}
+        <title>Main</title>
+        {% endblock %}
+        {% load staticfiles %}
+        <link rel="stylesheet" href="{% static 'css/djangochat.css' %}" type="text/css">
+        <link rel="icon" href="{% static 'icons/logo_icon.png' %}">
+        {% block additional-static %}
+        {% endblock %}
+    </head>
+    <body>
+        {% block body %}
+
+        {% endblock %}
+    </body>
+    {% block js %}
+
+    {% endblock %}
+</html>

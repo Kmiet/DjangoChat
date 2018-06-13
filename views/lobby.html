@@ -1,0 +1,127 @@
+{% extends 'index.html' %}
+{% block title %}
+<title>{{ title }}</title>
+{% endblock %}
+{% block additional-static %}
+{% load static %}
+<link rel="stylesheet" href="{% static '/css/lobby.css' %}" type="text/css">
+{% endblock %}
+{% block body %}
+
+<div class="lobby_page">
+    <div class="lobby_top_bar">
+        <div class="lobby_tp_channels">
+            <button class="lobby_tp_ch_btn" onclick="showElem('channel_list')">C H A N N E L S</button>
+        </div>
+        <div class="lobby_tp_user">
+            <i class="micon lobby_tp_usr_elem lobby_tp_usr_menu" style="max-width: 22px;" onclick="showElem('user_menu')">
+                menu
+            </i>
+            <div class="lobby_tp_username lobby_tp_usr_elem">
+                {{ user.name }}
+            </div>
+            <div class="lobby_tp_usr_elem">
+                <img src="/media/{{ user.avatar }}" class="lobby_tp_user_avatar">
+            </div>
+        </div>
+    </div>
+    <div class="lobby_main">
+        {% if not channelID %}
+        <div id="lobby_login">
+
+        </div>
+        {% else %}
+        <div id="lobby_chat">
+            <div id="chat-log" class="chat_main">
+
+            </div>
+            <div class="chat_bottom">
+                <div class="center" style="width: 70%; height: 100%;">
+                    <input id="chat-message-input" class="chat_input" placeholder="Type here...">
+                        <i id="chat-message-submit" class="micon chat_send_btn" onclick="">send</i>
+                    </input>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+<div id="channel_list" class="channel_list" style="visibility: hidden;">
+    <i class="micon channel_close_btn" onclick="closeElem('channel_list')">close</i>
+    <div class="channel_list_section" style="border-bottom: 2px solid #363636; margin-top: 30px;">
+        <p style="color: #ff9d48;">C H A N N E L S</p>
+    </div>
+    <div class="channel_act_list">
+        {% for channel in channels %}
+        <a class="channel_info center" href="/lobby/channel/{{ channel.id }}">
+            {{ channel.name }}
+        </a>
+        {% endfor %}
+    </div>
+        <div class="channel_list_bottom">
+            <a class="channel_new_btn center" onclick="showElem('create_channel')">ADD  CHANNEL</a>
+        </div>
+</div>
+
+<div id="user_menu" class="lobby_user_menu" style="visibility: hidden;">
+    <i class="micon menu_close_btn" style="display: block;" onclick="closeElem('user_menu')">close</i>
+    <div class="menu_section" style="font-size: 15px; margin-top: 30px;">
+        <p style="margin: 0;">M E N U</p>
+    </div>
+    <div class="menu_section">
+        <img src="/media/{{ user.avatar }}" class="menu_user_avatar center">
+    </div>
+    <div class="menu_section menu_username">
+        {{ user.name }}
+    </div>
+    <div class="menu_options">
+        <a class="menu_option" onclick="showElem('change_settings')">SETTINGS</a>
+    </div>
+    <div class="menu_logout">
+        <a href="/logout" class="menu_logout_btn center"> L O G O U T</a>
+    </div>
+</div>
+<div id="change_settings" class="modal_form" style="visibility: hidden;">
+    <div class="modal_main">
+        <i class="micon modal_close_btn" style="display: block;" onclick="closeElem('change_settings')">close</i>
+        <div class="modal_title">
+            S E T T I N G S
+        </div>
+        <form method="post" action="/lobby/user/settings" enctype="multipart/form-data" style="margin-top: 20px;">
+            {% csrf_token %}
+            <label class="modal_label center"> Nick colour</label>
+            <input type="text" name="colour" placeholder="#000000" class="modal_input center">
+            <label class="modal_label center"> Avatar </label>
+            <input type="file" name="avatar" accept="image/png" style="margin-left: 30px; margin-top: 10px; margin-bottom: 30px;">
+            <button type="submit" class="center modal_save_form">S A V E</button>
+        </form>
+    </div>
+</div>
+<div id="create_channel" class="modal_form" style="visibility: hidden;">
+    <div class="modal_main">
+        <i class="micon modal_close_btn" style="display: block;" onclick="closeElem('create_channel')">close</i>
+        <div class="modal_title">
+            CREATE CHANNEL
+        </div>
+        <form method="post" action="/lobby/channel/" style="margin-top: 20px;">
+            {% csrf_token %}
+            <label class="modal_label center"> Channel name</label>
+            <input type="text" name="name" placeholder="Fancy name" class="modal_input center" autocomplete="off" required>
+            <button type="submit" class="center modal_save_form">S A V E</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+    {% load static %}
+    <script src="{% static '/js/lobby.js' %}"></script>
+    <script src="{% static '/js/channel.js' %}"></script>
+    <script>
+
+        {% if channelID %}
+            connectChannel({{ channelID }}, { 'name': '{{ user.name }}', 'colour': '{{ user.colour }}'});
+        {% endif %}
+    </script>
+{% endblock %}

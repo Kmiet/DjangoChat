@@ -1,0 +1,43 @@
+@font-face {
+  font-family: MRegular;
+  src: url(../fonts/Montserrat-Regular.ttf);
+}
+
+@font-face {
+  font-family: MLight;
+  src: url(../fonts/Montserrat-Light.ttf);
+}
+
+@font-face {
+  font-family: MBold;
+  src: url(../fonts/Montserrat-Bold.ttf);
+}
+
+@font-face {
+  font-family: MIcons;
+  font-weight: 400;
+  src: url(../icons/MaterialIcons-Regular.ttf);
+}
+
+body {
+  background: #f6f6f6;
+  color: #ff851b;
+  font-family: MRegular;
+  margin: 0;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.micon {
+  font-family: MIcons;
+  font-style: normal;
+}
+
+.center {
+  top: 0;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
