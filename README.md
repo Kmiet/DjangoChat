@@ -1,5 +1,5 @@
 # DjangoChat
-Simple chat app written in Django using Django-Channels. It is based mostly their tutorials.
+Simple chat app written in Django using Django-Channels. It is based mostly on their tutorials.
 
 ## Tech
 #
@@ -21,7 +21,7 @@ $ pip install channels-redis
 
 #### 'Secret' settings
 
-Put your secret.py in DjangoChat directory. 
+Put your secret.py file in DjangoChat directory. 
 
 #
 ```py
